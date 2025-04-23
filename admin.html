@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -15,10 +14,8 @@
 </head>
 <body>
   <h1>全通岡山處 - 管理後台</h1>
-  <label for="current">目前叫號：</label>
-  <input type="number" id="current" placeholder="輸入目前號碼" />
-  <label for="waiting">等待人數：</label>
-  <input type="number" id="waiting" placeholder="輸入等待人數" />
+  <label for="count">目前叫號：</label>
+  <input type="number" id="count" placeholder="輸入號碼" />
   <button onclick="update()">更新</button>
 
   <script type="module">
@@ -39,11 +36,13 @@
     const db = getDatabase(app);
 
     window.update = function () {
-      const current = parseInt(document.getElementById('current').value);
-      const waiting = parseInt(document.getElementById('waiting').value);
-      if (!isNaN(current)) set(ref(db, 'current'), current);
-      if (!isNaN(waiting)) set(ref(db, 'waiting'), waiting);
-      alert('資料已更新！');
+      const count = parseInt(document.getElementById('count').value);
+      if (!isNaN(count)) {
+        set(ref(db, 'waitingCount'), count);
+        alert('號碼已更新！');
+      } else {
+        alert('請輸入有效號碼');
+      }
     };
   </script>
 </body>
